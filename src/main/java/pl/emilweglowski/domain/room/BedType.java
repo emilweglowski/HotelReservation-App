@@ -1,3 +1,5 @@
+package pl.emilweglowski.domain.room;
+
 public enum BedType {
 
     SINGLE,

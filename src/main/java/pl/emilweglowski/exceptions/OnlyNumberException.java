@@ -1,6 +1,8 @@
+package pl.emilweglowski.exceptions;
+
 public class OnlyNumberException extends ReservationCustomException {
 
-    private int code = 102;
+    private final int code = 102;
 
     public OnlyNumberException(String message) {
         super(message);
