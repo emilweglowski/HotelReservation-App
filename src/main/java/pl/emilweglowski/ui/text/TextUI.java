@@ -50,7 +50,7 @@ public class TextUI {
     private void readNewRoomData(Scanner input) {
         try {
             System.out.println("Add new room");
-            System.out.println("pl.emilweglowski.domain.room.Room number: ");
+            System.out.println("Room number: ");
             int roomNumber = input.nextInt();
             int[] bedTypes = chooseBedType(input);
             Room newRoom = roomService.createNewRoom(roomNumber, bedTypes);
@@ -105,30 +105,37 @@ public class TextUI {
             System.out.println("Unknown error code");
             System.out.println("Error message: " + e.getMessage());
             e.printStackTrace();
-        } finally {
-            System.out.println("Closing application");
         }
     }
 
     private void performAction(Scanner input) {
-        int option = getActionFromUser(input);
 
-        if (option == 1) {
-            readNewGuestData(input);
-        } else if (option == 2) {
-            readNewRoomData(input);
-        } else if (option == 3) {
-            System.out.println("Option 3 chosen");
-        } else {
-            throw new WrongOptionException("Wrong option in main menu");
+        int option = -1;
+
+        while(option!=0) {
+
+             option = getActionFromUser(input);
+
+            if (option == 1) {
+                readNewGuestData(input);
+            } else if (option == 2) {
+                readNewRoomData(input);
+            } else if (option == 3) {
+                System.out.println("Option 3 chosen");
+            } else if (option == 0) {
+                System.out.println("Closing application");
+            } else {
+                throw new WrongOptionException("Wrong option in main menu");
+            }
         }
     }
 
     private static int getActionFromUser(Scanner in) {
 
-        System.out.println("1. Add new guest");
-        System.out.println("2. Add new room");
-        System.out.println("3. Search for a guest");
+        System.out.println("1 - Add new guest");
+        System.out.println("2 - Add new room");
+        System.out.println("3 - Search for a guest");
+        System.out.println("0 - Exit from the  application");
         System.out.println("Choose option: ");
 
         int actionNumber;
