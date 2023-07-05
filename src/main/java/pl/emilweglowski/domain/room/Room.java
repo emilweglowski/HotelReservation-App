@@ -19,6 +19,6 @@ public class Room {
             bedInfo.append("\t").append(bed).append("\n");
         }
 
-        return String.format("New room number %d added \n%s", this.roomNumber, bedInfo);
+        return String.format("Number: %d \n%s", this.roomNumber, bedInfo);
     }
 }

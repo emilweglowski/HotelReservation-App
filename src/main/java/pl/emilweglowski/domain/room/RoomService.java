@@ -2,6 +2,8 @@ package pl.emilweglowski.domain.room;
 
 import pl.emilweglowski.exceptions.WrongOptionException;
 
+import java.util.List;
+
 public class RoomService {
 
     private final RoomRepository repository = new RoomRepository();
@@ -26,5 +28,9 @@ public class RoomService {
         }
 
         return repository.createNewRoom(roomNumber, bedTypes);
+    }
+
+    public List<Room> getAllRooms() {
+        return this.repository.getAll();
     }
 }

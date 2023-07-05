@@ -8,6 +8,7 @@ import pl.emilweglowski.domain.room.Room;
 import pl.emilweglowski.domain.room.RoomService;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class TextUI {
@@ -41,7 +42,7 @@ public class TextUI {
             }
 
             Guest newGuest = guestService.createNewGuest(firstName, lastName, age, isMale);
-            System.out.println(newGuest.getInfo());
+            System.out.println("New guest added: " + newGuest.getInfo());
         } catch (InputMismatchException e) {
             throw new OnlyNumberException("Use only numbers when choosing gender");
         }
@@ -54,7 +55,7 @@ public class TextUI {
             int roomNumber = input.nextInt();
             int[] bedTypes = chooseBedType(input);
             Room newRoom = roomService.createNewRoom(roomNumber, bedTypes);
-            System.out.println(newRoom.getInfo());
+            System.out.println("New room added: " + newRoom.getInfo());
         } catch (InputMismatchException e) {
             throw new OnlyNumberException("Use numbers when creating new room");
         }
@@ -121,8 +122,10 @@ public class TextUI {
             } else if (option == 2) {
                 readNewRoomData(input);
             } else if (option == 3) {
-                System.out.println("Option 3 chosen");
-            } else if (option == 0) {
+                showAllGuests();
+            } else if (option == 4) {
+                showAllRooms();
+            }else if (option == 0) {
                 System.out.println("Closing application");
             } else {
                 throw new WrongOptionException("Wrong option in main menu");
@@ -130,12 +133,29 @@ public class TextUI {
         }
     }
 
+    private void showAllRooms() {
+        List<Room> rooms = this.roomService.getAllRooms();
+
+        for (Room room : rooms) {
+            System.out.println(room.getInfo());
+        }
+    }
+
+    private void showAllGuests() {
+        List<Guest> guests = this.guestService.getAllGuests();
+
+        for (Guest guest : guests) {
+            System.out.println(guest.getInfo());
+        }
+    }
+
     private static int getActionFromUser(Scanner in) {
 
         System.out.println("1 - Add new guest");
         System.out.println("2 - Add new room");
-        System.out.println("3 - Search for a guest");
-        System.out.println("0 - Exit from the  application");
+        System.out.println("3 - Show all guests");
+        System.out.println("4 - Show all rooms");
+        System.out.println("0 - Exit from the application");
         System.out.println("Choose option: ");
 
         int actionNumber;

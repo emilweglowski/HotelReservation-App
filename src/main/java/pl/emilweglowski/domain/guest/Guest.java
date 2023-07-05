@@ -16,6 +16,6 @@ public class Guest {
     }
 
     public String getInfo() {
-        return String.format("New guest added: %s %s (%d, %s)", this.firstName, this.lastName, this.age, this.gender.toString());
+        return String.format("%s %s (%d, %s)", this.firstName, this.lastName, this.age, this.gender.toString());
     }
 }
