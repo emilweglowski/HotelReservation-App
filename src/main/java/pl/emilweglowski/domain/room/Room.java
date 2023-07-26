@@ -5,7 +5,6 @@ public class Room {
     private final int roomNumber;
     private final BedType[] beds;
 
-    //default package-private constructor for Room object - only room domain can use this
     Room(int roomNumber, BedType[] beds) {
         this.roomNumber = roomNumber;
         this.beds = beds;
@@ -20,5 +19,17 @@ public class Room {
         }
 
         return String.format("Number: %d \n%s", this.roomNumber, bedInfo);
+    }
+
+    String toCSV() {
+        String[] bedsAsString = new String[this.beds.length];
+
+        for (int i=0; i<this.beds.length; i++) {
+            bedsAsString[i] = this.beds[i].toString();
+        }
+
+        String bedTypes = String.join("#", bedsAsString);
+
+        return String.format("%d,%s%s", this.roomNumber, bedTypes, System.getProperty("line.separator"));
     }
 }

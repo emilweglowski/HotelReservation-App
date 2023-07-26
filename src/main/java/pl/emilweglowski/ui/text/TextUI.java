@@ -1,11 +1,13 @@
 package pl.emilweglowski.ui.text;
 
 import pl.emilweglowski.exceptions.OnlyNumberException;
+import pl.emilweglowski.exceptions.PersistenceToFileException;
 import pl.emilweglowski.exceptions.WrongOptionException;
 import pl.emilweglowski.domain.guest.Guest;
 import pl.emilweglowski.domain.guest.GuestService;
 import pl.emilweglowski.domain.room.Room;
 import pl.emilweglowski.domain.room.RoomService;
+import pl.emilweglowski.util.Properties;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -81,22 +83,26 @@ public class TextUI {
         return bedTypes;
     }
 
-    public void showSystemInfo(String hotelName, int systemVersion, boolean isDeveloperVersion) {
+    public void showSystemInfo() {
 
-        System.out.println("Welcome to the reservation system of " + hotelName);
-        System.out.println("Actual system version: " + systemVersion);
-        System.out.println("Developer version: " + isDeveloperVersion);
+        System.out.println("Welcome to the reservation system of " + Properties.HOTEL_NAME);
+        System.out.println("Actual system version: " + Properties.SYSTEM_VERSION);
+        System.out.println("Developer version: " + Properties.IS_DEVELOPER_VERSION);
 
         System.out.println("\n=============================\n");
     }
 
     public void showMainMenu() {
 
+        System.out.println("Loading data...");
+        this.guestService.readAll();
+        this.roomService.readAll();
+
         Scanner input = new Scanner(System.in);
 
         try {
             performAction(input);
-        } catch (WrongOptionException | OnlyNumberException e) {
+        } catch (WrongOptionException | OnlyNumberException | PersistenceToFileException e) {
             System.out.println("Unexpected error occurred");
             System.out.println("Error code: " + e.getCode());
             System.out.println("Error message: " + e.getMessage());
@@ -126,7 +132,9 @@ public class TextUI {
             } else if (option == 4) {
                 showAllRooms();
             }else if (option == 0) {
-                System.out.println("Closing application");
+                System.out.println("Closing application. Saving data.");
+                this.guestService.saveAll();
+                this.roomService.saveAll();
             } else {
                 throw new WrongOptionException("Wrong option in main menu");
             }

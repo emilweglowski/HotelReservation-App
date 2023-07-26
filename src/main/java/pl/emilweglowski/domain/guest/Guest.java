@@ -7,7 +7,6 @@ public class Guest {
     private final int age;
     private final Gender gender;
 
-    //default package-private constructor for Room object - only room domain can use this
     Guest(String firstName, String lastName, int age, Gender gender) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,5 +16,9 @@ public class Guest {
 
     public String getInfo() {
         return String.format("%s %s (%d, %s)", this.firstName, this.lastName, this.age, this.gender.toString());
+    }
+
+    String toCSV() {
+        return String.format("%s,%S,%d,%s%s", this.firstName, this.lastName, this.age, this.gender, System.getProperty("line.separator"));
     }
 }
