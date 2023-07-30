@@ -2,12 +2,18 @@ package pl.emilweglowski.domain.room;
 
 public class Room {
 
+    private final int id;
     private final int roomNumber;
     private final BedType[] beds;
 
-    Room(int roomNumber, BedType[] beds) {
+    Room(int id, int roomNumber, BedType[] beds) {
+        this.id = id;
         this.roomNumber = roomNumber;
         this.beds = beds;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getInfo() {
@@ -18,7 +24,7 @@ public class Room {
             bedInfo.append("\t").append(bed).append("\n");
         }
 
-        return String.format("Number: %d \n%s", this.roomNumber, bedInfo);
+        return String.format("%d Number: %d \n%s", this.id, this.roomNumber, bedInfo);
     }
 
     String toCSV() {
@@ -30,6 +36,6 @@ public class Room {
 
         String bedTypes = String.join("#", bedsAsString);
 
-        return String.format("%d,%s%s", this.roomNumber, bedTypes, System.getProperty("line.separator"));
+        return String.format("%d,%d,%s%s", this.id, this.roomNumber, bedTypes, System.getProperty("line.separator"));
     }
 }

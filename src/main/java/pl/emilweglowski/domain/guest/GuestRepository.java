@@ -16,7 +16,13 @@ public class GuestRepository {
     private final List<Guest> guests = new ArrayList<>();
 
     Guest createNewGuest(String firstName, String lastName, int age, Gender gender) {
-        Guest newGuest = new Guest(firstName, lastName, age, gender);
+        Guest newGuest = new Guest(findNewId(), firstName, lastName, age, gender);
+        guests.add(newGuest);
+        return newGuest;
+    }
+
+    Guest addGuestFromFile(int id, String firstName, String lastName, int age, Gender gender) {
+        Guest newGuest = new Guest(id, firstName, lastName, age, gender);
         guests.add(newGuest);
         return newGuest;
     }
@@ -48,20 +54,35 @@ public class GuestRepository {
 
         Path file = Paths.get(Properties.DATA_DIRECTORY.toString(), name);
 
+        if (!Files.exists(file)) {
+            return;
+        }
+
         try {
             String data = Files.readString(file, StandardCharsets.UTF_8);
             String[] guestsAsString = data.split(System.getProperty("line.separator"));
 
             for (String guestAsString : guestsAsString) {
                 String[] guestData = guestAsString.split(",");
-                int age = Integer.parseInt(guestData[2]);
-                Gender gender = Gender.valueOf(guestData[3]);
-                createNewGuest(guestData[0], guestData[1], age, gender);
+                int id = Integer.parseInt(guestData[0]);
+                int age = Integer.parseInt(guestData[3]);
+                Gender gender = Gender.valueOf(guestData[4]);
+                addGuestFromFile(id, guestData[1], guestData[2], age, gender);
             }
 
         } catch (IOException e) {
             throw new PersistenceToFileException(file.toString(), "read", "guests data");
         }
+    }
+
+    private int findNewId() {
+        int max = 0;
+        for (Guest guest : guests) {
+            if (guest.getId() > max) {
+                max = guest.getId();
+            }
+        }
+        return max + 1;
     }
 }
 

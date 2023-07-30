@@ -2,23 +2,29 @@ package pl.emilweglowski.domain.guest;
 
 public class Guest {
 
+    private final int id;
     private final String firstName;
     private final String lastName;
     private final int age;
     private final Gender gender;
 
-    Guest(String firstName, String lastName, int age, Gender gender) {
+    Guest(int id, String firstName, String lastName, int age, Gender gender) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.gender = gender;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getInfo() {
-        return String.format("%s %s (%d, %s)", this.firstName, this.lastName, this.age, this.gender.toString());
+        return String.format("%d %s %s (%d, %s)", this.id, this.firstName, this.lastName, this.age, this.gender.toString());
     }
 
     String toCSV() {
-        return String.format("%s,%S,%d,%s%s", this.firstName, this.lastName, this.age, this.gender, System.getProperty("line.separator"));
+        return String.format("%d,%s,%s,%d,%s%s", this.id, this.firstName, this.lastName, this.age, this.gender, System.getProperty("line.separator"));
     }
 }
