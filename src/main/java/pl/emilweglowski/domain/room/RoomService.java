@@ -41,4 +41,28 @@ public class RoomService {
     public void readAll() {
         this.repository.readAll();
     }
+
+    public void removeRoom(int id) {
+        this.repository.remove(id);
+    }
+
+    public void editRoom(int id, int roomNumber, int[] bedTypesOptions) {
+
+        BedType[] bedTypes = new BedType[bedTypesOptions.length];
+
+        for (int i=0; i<bedTypesOptions.length; i++) {
+            BedType bedType;
+            if (bedTypesOptions[i] == 1) {
+                bedType = BedType.SINGLE;
+            } else if (bedTypesOptions[i] == 2) {
+                bedType = BedType.DOUBLE;
+            } else if (bedTypesOptions[i] == 3) {
+                bedType = BedType.KING_SIZE;
+            } else {
+                throw new WrongOptionException("Wrong option when selecting bed type");
+            }
+            bedTypes[i] = bedType;
+        }
+        this.repository.editRoom(id, roomNumber, bedTypes);
+    }
 }

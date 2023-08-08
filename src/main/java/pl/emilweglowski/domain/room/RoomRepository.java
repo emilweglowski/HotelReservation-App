@@ -1,6 +1,5 @@
 package pl.emilweglowski.domain.room;
 
-import pl.emilweglowski.domain.guest.Guest;
 import pl.emilweglowski.exceptions.PersistenceToFileException;
 import pl.emilweglowski.util.Properties;
 
@@ -22,7 +21,7 @@ public class RoomRepository {
         return newRoom;
     }
 
-    Room addRoomFromFile(int id, int roomNumber, BedType[] bedType) {
+    Room addExistingRoom(int id, int roomNumber, BedType[] bedType) {
         Room newRoom = new Room(id, roomNumber, bedType);
         rooms.add(newRoom);
         return newRoom;
@@ -76,7 +75,7 @@ public class RoomRepository {
                     bedTypes[i] = BedType.valueOf(bedTypesAsString[i]);
                 }
 
-                addRoomFromFile(id, number, bedTypes);
+                addExistingRoom(id, number, bedTypes);
             }
         } catch (IOException e) {
             throw new PersistenceToFileException(file.toString(), "read", "rooms data");
@@ -91,5 +90,23 @@ public class RoomRepository {
             }
         }
         return max + 1;
+    }
+
+    public void remove(int id) {
+        int roomToBeRemovedIndex = -1;
+        for (int i=0; i<this.rooms.size(); i++) {
+            if (this.rooms.get(i).getId() == id) {
+                roomToBeRemovedIndex = i;
+                break;
+            }
+        }
+        if (roomToBeRemovedIndex > -1) {
+            this.rooms.remove(roomToBeRemovedIndex);
+        }
+    }
+
+    public void editRoom(int id, int roomNumber, BedType[] bedTypes) {
+        this.remove(id);
+        this.addExistingRoom(id, roomNumber, bedTypes);
     }
 }
