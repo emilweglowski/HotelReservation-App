@@ -1,5 +1,7 @@
 package pl.emilweglowski.ui.text;
 
+import pl.emilweglowski.domain.reservation.Reservation;
+import pl.emilweglowski.domain.reservation.ReservationService;
 import pl.emilweglowski.exceptions.OnlyNumberException;
 import pl.emilweglowski.exceptions.PersistenceToFileException;
 import pl.emilweglowski.exceptions.WrongOptionException;
@@ -9,6 +11,7 @@ import pl.emilweglowski.domain.room.Room;
 import pl.emilweglowski.domain.room.RoomService;
 import pl.emilweglowski.util.Properties;
 
+import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +20,7 @@ public class TextUI {
 
     private final GuestService guestService = new GuestService();
     private final RoomService roomService = new RoomService();
+    private final ReservationService reservationService = new ReservationService();
 
     private void readNewGuestData(Scanner input) {
         try {
@@ -139,6 +143,8 @@ public class TextUI {
                 removeRoom(input);
             } else if (option == 8) {
                 editRoom(input);
+            } else if (option == 9) {
+                createReservation(input);
             } else if (option == 0) {
                 System.out.println("Closing application. Saving data.");
                 this.guestService.saveAll();
@@ -146,6 +152,25 @@ public class TextUI {
             } else {
                 throw new WrongOptionException("Wrong option in main menu");
             }
+        }
+    }
+
+    private void createReservation(Scanner input) {
+        System.out.println("Check-in date (DD.MM.YYYY):");
+        String fromAsString = input.next();
+        LocalDate from = LocalDate.parse(fromAsString, Properties.DATE_FORMATTER);
+        System.out.println("Check-out date (DD.MM.YYYY):");
+        String toAsString = input.next();
+        LocalDate to = LocalDate.parse(toAsString, Properties.DATE_FORMATTER);
+        System.out.println("Enter room ID:");
+        int roomId = input.nextInt();
+        System.out.println("Enter guest ID:");
+        int guestId = input.nextInt();
+
+        //TODO: handle null reservation
+        Reservation reservation = this.reservationService.createNewReservation(from, to, roomId, guestId);
+        if (reservation!=null) {
+            System.out.println("Reservation created successfully");
         }
     }
 
@@ -243,6 +268,7 @@ public class TextUI {
         System.out.println("6 - Edit guest data");
         System.out.println("7 - Remove room");
         System.out.println("8 - Edit room");
+        System.out.println("9 - Create reservation");
         System.out.println("0 - Exit from the application");
         System.out.println("Choose option: ");
 

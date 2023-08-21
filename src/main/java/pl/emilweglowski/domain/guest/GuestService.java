@@ -4,7 +4,7 @@ import java.util.List;
 
 public class GuestService {
 
-    private final GuestRepository repository = new GuestRepository();
+    private final static GuestRepository repository = new GuestRepository();
 
     public Guest createNewGuest(String firstName, String lastName, int age, boolean isMale) {
 
@@ -37,5 +37,9 @@ public class GuestService {
             gender = Gender.MALE;
         }
         this.repository.edit(id, firstName, lastName, age, gender);
+    }
+
+    public Guest getGuestById(int guestId) {
+        return this.repository.getById(guestId);
     }
 }

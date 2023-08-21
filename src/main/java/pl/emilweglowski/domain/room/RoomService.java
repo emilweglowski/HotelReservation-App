@@ -6,7 +6,7 @@ import java.util.List;
 
 public class RoomService {
 
-    private final RoomRepository repository = new RoomRepository();
+    private final static RoomRepository repository = new RoomRepository();
 
     public Room createNewRoom(int roomNumber, int[] bedTypesOptions) {
 
@@ -64,5 +64,9 @@ public class RoomService {
             bedTypes[i] = bedType;
         }
         this.repository.editRoom(id, roomNumber, bedTypes);
+    }
+
+    public Room getRoomById(int roomId) {
+        return this.repository.getById(roomId);
     }
 }
