@@ -64,6 +64,9 @@ public class RoomRepository {
 
             for (String roomAsString : roomsAsString) {
                 String[] roomData = roomAsString.split(",");
+                if(roomData[0]==null || roomData[0].trim().isEmpty()) {
+                    continue;
+                }
                 int id = Integer.parseInt(roomData[0]);
                 int number = Integer.parseInt(roomData[1]);
                 String bedTypesData = roomData[2];

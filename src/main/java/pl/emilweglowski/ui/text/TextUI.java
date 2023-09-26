@@ -11,6 +11,7 @@ import pl.emilweglowski.domain.room.Room;
 import pl.emilweglowski.domain.room.RoomService;
 import pl.emilweglowski.util.Properties;
 
+import java.security.PrivilegedActionException;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -101,6 +102,7 @@ public class TextUI {
         System.out.println("Loading data...");
         this.guestService.readAll();
         this.roomService.readAll();
+        this.reservationService.readAll();
 
         Scanner input = new Scanner(System.in);
 
@@ -149,6 +151,7 @@ public class TextUI {
                 System.out.println("Closing application. Saving data.");
                 this.guestService.saveAll();
                 this.roomService.saveAll();
+                this.reservationService.saveAll();
             } else {
                 throw new WrongOptionException("Wrong option in main menu");
             }
@@ -168,10 +171,15 @@ public class TextUI {
         int guestId = input.nextInt();
 
         //TODO: handle null reservation
-        Reservation reservation = this.reservationService.createNewReservation(from, to, roomId, guestId);
-        if (reservation!=null) {
-            System.out.println("Reservation created successfully");
+        try {
+            Reservation reservation = this.reservationService.createNewReservation(from, to, roomId, guestId);
+            if (reservation!=null) {
+                System.out.println("Reservation created successfully");
+            }
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Ending date can not be earlier than starting date");
         }
+
     }
 
     private void editRoom(Scanner input) {
