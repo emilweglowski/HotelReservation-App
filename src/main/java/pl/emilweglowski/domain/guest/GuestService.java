@@ -1,5 +1,8 @@
 package pl.emilweglowski.domain.guest;
 
+import pl.emilweglowski.domain.guest.dto.GuestDTO;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class GuestService {
@@ -41,5 +44,16 @@ public class GuestService {
 
     public Guest getGuestById(int guestId) {
         return this.repository.getById(guestId);
+    }
+
+    public List<GuestDTO> getGuestsAsDTO() {
+        List<GuestDTO> result = new ArrayList<>();
+        List<Guest> allGuests = repository.getAll();
+
+        for(Guest guest : allGuests) {
+            GuestDTO dto = guest.generateDTO();
+            result.add(dto);
+        }
+        return result;
     }
 }

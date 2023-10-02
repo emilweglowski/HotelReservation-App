@@ -2,18 +2,21 @@ package pl.emilweglowski.domain.reservation;
 
 import pl.emilweglowski.domain.guest.Guest;
 import pl.emilweglowski.domain.guest.GuestService;
+import pl.emilweglowski.domain.reservation.dto.ReservationDTO;
 import pl.emilweglowski.domain.room.Room;
 import pl.emilweglowski.domain.room.RoomService;
 import pl.emilweglowski.util.Properties;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReservationService {
 
-    private final RoomService roomService = new RoomService();
-    private final GuestService guestService = new GuestService();
-    private final ReservationRepository repository = new ReservationRepository();
+    private static final RoomService roomService = new RoomService();
+    private static final GuestService guestService = new GuestService();
+    private static final ReservationRepository repository = new ReservationRepository();
 
     public Reservation createNewReservation(LocalDate from, LocalDate to, int roomId, int guestId) throws IllegalArgumentException {
 
@@ -38,5 +41,16 @@ public class ReservationService {
 
     public void saveAll() {
         this.repository.saveAll();
+    }
+
+    public List<ReservationDTO> getReservationsAsDTO() {
+        List<ReservationDTO> result = new ArrayList<>();
+        List<Reservation> allReservations = repository.getAll();
+
+        for(Reservation reservation : allReservations) {
+            ReservationDTO dto = reservation.generateDTO();
+            result.add(dto);
+        }
+        return result;
     }
 }

@@ -1,9 +1,12 @@
 package pl.emilweglowski;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import pl.emilweglowski.domain.guest.GuestService;
+import pl.emilweglowski.domain.reservation.ReservationService;
+import pl.emilweglowski.domain.room.RoomService;
 import pl.emilweglowski.exceptions.PersistenceToFileException;
 import pl.emilweglowski.ui.text.TextUI;
-import pl.emilweglowski.ui.text.gui.PrimaryStage;
+import pl.emilweglowski.ui.gui.PrimaryStage;
 import pl.emilweglowski.util.Properties;
 
 import java.io.IOException;
@@ -11,11 +14,18 @@ import java.io.IOException;
 public class App extends Application {
 
     private static final TextUI textUI = new TextUI();
+    private static final GuestService guestService = new GuestService();
+    private static final RoomService roomService = new RoomService();
+    private static final ReservationService reservationService = new ReservationService();
 
     public static void main(String[] args) {
 
         try {
             Properties.createDataDirectory();
+            System.out.println("Loading data...");
+            guestService.readAll();
+            roomService.readAll();
+            reservationService.readAll();
         } catch (IOException e) {
             throw new PersistenceToFileException(Properties.DATA_DIRECTORY.toString(), "create", "directory");
         }

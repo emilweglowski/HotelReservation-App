@@ -99,11 +99,6 @@ public class TextUI {
 
     public void showMainMenu() {
 
-        System.out.println("Loading data...");
-        this.guestService.readAll();
-        this.roomService.readAll();
-        this.reservationService.readAll();
-
         Scanner input = new Scanner(System.in);
 
         try {

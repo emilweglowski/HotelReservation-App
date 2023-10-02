@@ -1,4 +1,4 @@
-package pl.emilweglowski.ui.text.gui;
+package pl.emilweglowski.ui.gui;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;

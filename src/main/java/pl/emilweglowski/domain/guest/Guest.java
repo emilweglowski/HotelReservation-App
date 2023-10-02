@@ -1,5 +1,7 @@
 package pl.emilweglowski.domain.guest;
 
+import pl.emilweglowski.domain.guest.dto.GuestDTO;
+
 public class Guest {
 
     private final int id;
@@ -20,11 +22,27 @@ public class Guest {
         return id;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     public String getInfo() {
         return String.format("%d %s %s (%d, %s)", this.id, this.firstName, this.lastName, this.age, this.gender.toString());
     }
 
     String toCSV() {
         return String.format("%d,%s,%s,%d,%s%s", this.id, this.firstName, this.lastName, this.age, this.gender, System.getProperty("line.separator"));
+    }
+
+    public GuestDTO generateDTO() {
+        String gender = "male";
+        if(this.gender.equals(Gender.FEMALE)) {
+            gender = "female";
+        }
+        return new GuestDTO(this.id, this.firstName, this.lastName, this.age, gender);
     }
 }

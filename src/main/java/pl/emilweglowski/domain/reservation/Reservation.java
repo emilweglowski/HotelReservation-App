@@ -1,6 +1,7 @@
 package pl.emilweglowski.domain.reservation;
 
 import pl.emilweglowski.domain.guest.Guest;
+import pl.emilweglowski.domain.reservation.dto.ReservationDTO;
 import pl.emilweglowski.domain.room.Room;
 
 import java.time.LocalDateTime;
@@ -22,10 +23,16 @@ public class Reservation {
     }
 
     String toCSV() {
-        return String.format("%s,%s,%s,%s,%s%s", this.id, this.room.getId(), this.guest.getId(), this.from.toString(), this.to.toString(), System.getProperty("line.separator"));
+        return String.format("%s,%s,%s,%s,%s%s", this.id, this.room.getId(), this.guest.getId(), this.from.toString(),
+                this.to.toString(), System.getProperty("line.separator"));
     }
 
     public int getId() {
         return this.id;
+    }
+
+    public ReservationDTO generateDTO() {
+        return new ReservationDTO(this.id, this.from, this.to, this.room.getId(), this.room.getNumber(),
+                this.guest.getId(), this.guest.getFirstName()+" "+this.guest.getLastName());
     }
 }
