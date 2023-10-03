@@ -54,6 +54,12 @@ public class Room {
 
         String bedTypes = String.join(",", bedsAsString);
 
-        return new RoomDTO(this.id, this.roomNumber, bedTypes);
+        int roomSize = 0;
+
+        for(BedType bedType : beds) {
+            roomSize += bedType.getSize();
+        }
+
+        return new RoomDTO(this.id, this.roomNumber, bedTypes, beds.length, roomSize);
     }
 }

@@ -18,13 +18,19 @@ public class RoomsTab {
 
         TableView<RoomDTO> tableView = new TableView<>();
 
-        TableColumn<RoomDTO, Integer> numberColumn = new TableColumn<>("Number");
+        TableColumn<RoomDTO, Integer> numberColumn = new TableColumn<>("Room number");
         numberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
 
         TableColumn<RoomDTO, String> bedsColumn = new TableColumn<>("Bed types");
         bedsColumn.setCellValueFactory(new PropertyValueFactory<>("beds"));
 
-        tableView.getColumns().addAll(numberColumn, bedsColumn);
+        TableColumn<RoomDTO, Integer> bedsCountColumn = new TableColumn<>("Beds number");
+        bedsCountColumn.setCellValueFactory(new PropertyValueFactory<>("bedsCount"));
+
+        TableColumn<RoomDTO, Integer> roomSizeColumn = new TableColumn<>("Room size");
+        roomSizeColumn.setCellValueFactory(new PropertyValueFactory<>("roomSize"));
+
+        tableView.getColumns().addAll(numberColumn, roomSizeColumn, bedsCountColumn, bedsColumn);
 
         List<RoomDTO> allAsDTO = roomService.getRoomsAsDTO();
 
