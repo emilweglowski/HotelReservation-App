@@ -13,6 +13,15 @@ import java.util.List;
 
 public class RoomRepository {
 
+    private final static RoomRepository instance = new RoomRepository();
+
+    private RoomRepository() {
+    }
+
+    public static RoomRepository getInstance() {
+        return instance;
+    }
+
     private final List<Room> rooms = new ArrayList<>();
 
     Room createNewRoom(int roomNumber, BedType[] bedType) {

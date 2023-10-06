@@ -14,9 +14,17 @@ import java.util.List;
 
 public class ReservationService {
 
-    private static final RoomService roomService = new RoomService();
+    private final RoomService roomService = RoomService.getInstance();
     private static final GuestService guestService = new GuestService();
-    private static final ReservationRepository repository = new ReservationRepository();
+    private final ReservationRepository repository = ReservationRepository.getInstance();
+    private final static ReservationService instance = new ReservationService();
+
+    private ReservationService() {
+    }
+
+    public ReservationService getInstance() {
+        return instance;
+    }
 
     public Reservation createNewReservation(LocalDate from, LocalDate to, int roomId, int guestId) throws IllegalArgumentException {
 

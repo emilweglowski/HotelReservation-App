@@ -19,8 +19,17 @@ import java.util.List;
 public class ReservationRepository {
 
     List<Reservation> reservations = new ArrayList<>();
-    RoomService roomService = new RoomService();
+    RoomService roomService = RoomService.getInstance();
     GuestService guestService = new GuestService();
+
+    private static final ReservationRepository instance = new ReservationRepository();
+
+    private ReservationRepository() {
+    }
+
+    public static ReservationRepository getInstance() {
+        return instance;
+    }
 
     public Reservation createNewReservation(Room room, Guest guest, LocalDateTime from, LocalDateTime to) {
         Reservation reservation = new Reservation(findNewId(), room, guest, from, to);
