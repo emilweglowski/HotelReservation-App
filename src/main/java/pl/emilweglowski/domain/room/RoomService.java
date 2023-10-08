@@ -1,5 +1,6 @@
 package pl.emilweglowski.domain.room;
 
+import pl.emilweglowski.domain.ObjectPool;
 import pl.emilweglowski.domain.room.dto.RoomDTO;
 import pl.emilweglowski.exceptions.WrongOptionException;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class RoomService {
 
-    private final RoomRepository repository = RoomRepository.getInstance();
+    private final RoomRepository repository = ObjectPool.getRoomRepository();
     private final static RoomService instance = new RoomService();
 
     private RoomService(){

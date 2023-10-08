@@ -1,6 +1,7 @@
 package pl.emilweglowski;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import pl.emilweglowski.domain.ObjectPool;
 import pl.emilweglowski.domain.guest.GuestService;
 import pl.emilweglowski.domain.reservation.ReservationService;
 import pl.emilweglowski.domain.room.RoomService;
@@ -14,9 +15,9 @@ import java.io.IOException;
 public class App extends Application {
 
     private static final TextUI textUI = new TextUI();
-    private static final GuestService guestService = new GuestService();
-    private static final RoomService roomService = new RoomService();
-    private static final ReservationService reservationService = new ReservationService();
+    private static final GuestService guestService = ObjectPool.getGuestService();
+    private static final RoomService roomService = ObjectPool.getRoomService();
+    private static final ReservationService reservationService = ObjectPool.getReservationService();
 
     public static void main(String[] args) {
 

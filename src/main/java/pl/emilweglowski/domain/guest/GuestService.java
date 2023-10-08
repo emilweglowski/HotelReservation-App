@@ -1,5 +1,6 @@
 package pl.emilweglowski.domain.guest;
 
+import pl.emilweglowski.domain.ObjectPool;
 import pl.emilweglowski.domain.guest.dto.GuestDTO;
 
 import java.util.ArrayList;
@@ -7,13 +8,13 @@ import java.util.List;
 
 public class GuestService {
 
-    private final GuestRepository repository = GuestRepository.getInstance();
+    private final GuestRepository repository = ObjectPool.getGuestRepository();
     private final static GuestService instance = new GuestService();
 
     private GuestService() {
     }
 
-    public GuestService getInstance() {
+    public static GuestService getInstance() {
         return instance;
     }
 

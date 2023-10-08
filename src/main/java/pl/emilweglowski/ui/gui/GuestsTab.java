@@ -4,13 +4,14 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import pl.emilweglowski.domain.ObjectPool;
 import pl.emilweglowski.domain.guest.GuestService;
 import pl.emilweglowski.domain.guest.dto.GuestDTO;
 
 public class GuestsTab {
 
     private Tab guestsTab;
-    private GuestService guestService = new GuestService();
+    private GuestService guestService = ObjectPool.getGuestService();
 
     public GuestsTab() {
 

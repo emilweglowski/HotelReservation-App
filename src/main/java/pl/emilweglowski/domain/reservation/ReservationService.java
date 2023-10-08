@@ -1,5 +1,6 @@
 package pl.emilweglowski.domain.reservation;
 
+import pl.emilweglowski.domain.ObjectPool;
 import pl.emilweglowski.domain.guest.Guest;
 import pl.emilweglowski.domain.guest.GuestService;
 import pl.emilweglowski.domain.reservation.dto.ReservationDTO;
@@ -14,15 +15,15 @@ import java.util.List;
 
 public class ReservationService {
 
-    private final RoomService roomService = RoomService.getInstance();
-    private static final GuestService guestService = new GuestService();
-    private final ReservationRepository repository = ReservationRepository.getInstance();
+    private final RoomService roomService = ObjectPool.getRoomService();
+    private final GuestService guestService = ObjectPool.getGuestService();
+    private final ReservationRepository repository = ObjectPool.getReservationRepository();
     private final static ReservationService instance = new ReservationService();
 
     private ReservationService() {
     }
 
-    public ReservationService getInstance() {
+    public static ReservationService getInstance() {
         return instance;
     }
 
