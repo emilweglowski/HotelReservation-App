@@ -15,6 +15,27 @@ public class RoomService {
     private RoomService(){
     }
 
+    public Room createNewRoom(int roomNumber, List<String> bedTypesAsStrings) {
+        BedType[] bedTypes = new BedType[bedTypesAsStrings.size()];
+
+        for (int i=0; i<bedTypesAsStrings.size(); i++) {
+
+            BedType bedType;
+            if (bedTypesAsStrings.get(i).equals("Single")) {
+                bedType = BedType.SINGLE;
+            } else if (bedTypesAsStrings.get(i).equals("Double")) {
+                bedType = BedType.DOUBLE;
+            } else if (bedTypesAsStrings.get(i).equals("King size")) {
+                bedType = BedType.KING_SIZE;
+            } else {
+                throw new WrongOptionException("Wrong option when selecting bed type");
+            }
+            bedTypes[i] = bedType;
+        }
+
+        return repository.createNewRoom(roomNumber, bedTypes);
+    }
+
     public Room createNewRoom(int roomNumber, int[] bedTypesOptions) {
 
         BedType[] bedTypes = new BedType[bedTypesOptions.length];

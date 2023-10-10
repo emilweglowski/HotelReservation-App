@@ -1,18 +1,17 @@
 package pl.emilweglowski.ui.gui;
 
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.stage.Stage;
 
 public class MainTabView {
 
     private TabPane mainTabs;
 
-    public MainTabView() {
+    public MainTabView(Stage primaryStage) {
         this.mainTabs = new TabPane();
 
         GuestsTab guestsTab = new GuestsTab();
-        RoomsTab roomsTab = new RoomsTab();
+        RoomsTab roomsTab = new RoomsTab(primaryStage);
         ReservationsTab reservationTab = new ReservationsTab();
 
         this.mainTabs.getTabs().addAll(reservationTab.getReservationTab(),
