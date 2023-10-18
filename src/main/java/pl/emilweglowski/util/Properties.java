@@ -11,11 +11,17 @@ public class Properties {
     public static final String HOTEL_NAME = "Grand Hotel";
     public static final int SYSTEM_VERSION = 2;
     public static final boolean IS_DEVELOPER_VERSION = true;
+
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
     public static final int HOTEL_NIGHT_START_HOUR = 15;
     public static final int HOTEL_NIGHT_START_MINUTE = 0;
     public static final int HOTEL_NIGHT_END_HOUR = 10;
     public static final int HOTEL_NIGHT_END_MINUTE = 0;
+
+    public static final String SINGLE_BED = "Single";
+    public static final String DOUBLE_BED = "Double";
+    public static final String KING_SIZE = "King size";
 
     public static final Path DATA_DIRECTORY = Paths.get(System.getProperty("user.home"), "reservation_system");
 
