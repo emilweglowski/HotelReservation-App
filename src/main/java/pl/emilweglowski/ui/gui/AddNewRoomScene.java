@@ -25,7 +25,7 @@ public class AddNewRoomScene {
     private final List<ComboBox<String>> comboBoxes = new ArrayList<>();
     private final RoomService roomService = ObjectPool.getRoomService();
 
-    public AddNewRoomScene(Stage addRoomPopup, TableView<RoomDTO> tableView){
+    public AddNewRoomScene(Stage addRoomPopup, TableView<RoomDTO> roomsTableView){
 
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
@@ -71,10 +71,10 @@ public class AddNewRoomScene {
             });
             this.roomService.createNewRoom(newRoomNumber, bedTypes);
 
-            tableView.getItems().clear();
+            roomsTableView.getItems().clear();
 
             List<RoomDTO> allAsDTO = roomService.getRoomsAsDTO();
-            tableView.getItems().addAll(allAsDTO);
+            roomsTableView.getItems().addAll(allAsDTO);
 
             addRoomPopup.close();
         });

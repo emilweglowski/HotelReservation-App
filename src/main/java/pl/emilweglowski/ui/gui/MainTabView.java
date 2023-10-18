@@ -10,7 +10,7 @@ public class MainTabView {
     public MainTabView(Stage primaryStage) {
         this.mainTabs = new TabPane();
 
-        GuestsTab guestsTab = new GuestsTab();
+        GuestsTab guestsTab = new GuestsTab(primaryStage);
         RoomsTab roomsTab = new RoomsTab(primaryStage);
         ReservationsTab reservationTab = new ReservationsTab();
 

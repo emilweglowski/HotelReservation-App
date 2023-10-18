@@ -24,8 +24,8 @@ public class RoomsTab {
         button.setOnAction(actionEvent -> {
             Stage addRoomPopup = new Stage();
             addRoomPopup.initModality(Modality.WINDOW_MODAL);
-            addRoomPopup.setScene(new AddNewRoomScene(addRoomPopup, tableView).getMainScene());
             addRoomPopup.initOwner(primaryStage);
+            addRoomPopup.setScene(new AddNewRoomScene(addRoomPopup, tableView).getMainScene());
             addRoomPopup.setTitle("Create new room");
             addRoomPopup.showAndWait();
 
