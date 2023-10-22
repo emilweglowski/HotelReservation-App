@@ -20,7 +20,7 @@ public class RoomsTab {
 
         TableView<RoomDTO> tableView = getRoomDTOTableView();
 
-        Button button = new Button("Create new");
+        Button button = new Button("Create new room");
         button.setOnAction(actionEvent -> {
             Stage addRoomPopup = new Stage();
             addRoomPopup.initModality(Modality.WINDOW_MODAL);
@@ -28,7 +28,6 @@ public class RoomsTab {
             addRoomPopup.setScene(new AddNewRoomScene(addRoomPopup, tableView).getMainScene());
             addRoomPopup.setTitle("Create new room");
             addRoomPopup.showAndWait();
-
         });
 
         VBox layout = new VBox(button, tableView);

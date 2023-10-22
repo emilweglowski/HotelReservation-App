@@ -12,8 +12,8 @@ import pl.emilweglowski.util.Properties;
 
 public class AddNewGuestScene {
 
-    private Scene mainScene;
-    private GuestService guestService = ObjectPool.getGuestService();
+    private final Scene mainScene;
+    private final GuestService guestService = ObjectPool.getGuestService();
 
     public AddNewGuestScene(Stage addGuestPopup, TableView<GuestDTO> guestsTableView) {
 
