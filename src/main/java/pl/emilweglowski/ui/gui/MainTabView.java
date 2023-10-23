@@ -2,6 +2,9 @@ package pl.emilweglowski.ui.gui;
 
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import pl.emilweglowski.ui.gui.guests.GuestsTab;
+import pl.emilweglowski.ui.gui.reservations.ReservationsTab;
+import pl.emilweglowski.ui.gui.rooms.RoomsTab;
 
 public class MainTabView {
 

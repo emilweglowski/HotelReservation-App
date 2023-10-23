@@ -1,4 +1,4 @@
-package pl.emilweglowski.ui.gui;
+package pl.emilweglowski.ui.gui.rooms;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

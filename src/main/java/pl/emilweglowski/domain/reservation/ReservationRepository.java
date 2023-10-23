@@ -63,7 +63,7 @@ public class ReservationRepository {
 
             for (String reservationAsString : reservationsAsString) {
                 String[] reservationData = reservationAsString.split(",");
-                if(reservationData[0]==null || reservationData[0].trim().isEmpty()) {
+                if (reservationData[0] == null || reservationData[0].trim().isEmpty()) {
                     continue;
                 }
                 int id = Integer.parseInt(reservationData[0]);
@@ -108,5 +108,18 @@ public class ReservationRepository {
 
     public List<Reservation> getAll() {
         return this.reservations;
+    }
+
+    public void remove(int id) {
+        int reservationToBeRemovedIndex = -1;
+        for (int i = 0; i < this.reservations.size(); i++) {
+            if (this.reservations.get(i).getId() == id) {
+                reservationToBeRemovedIndex = i;
+                break;
+            }
+        }
+        if (reservationToBeRemovedIndex > -1) {
+            this.reservations.remove(reservationToBeRemovedIndex);
+        }
     }
 }

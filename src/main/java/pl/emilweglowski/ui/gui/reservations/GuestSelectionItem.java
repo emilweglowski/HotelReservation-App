@@ -1,4 +1,4 @@
-package pl.emilweglowski.ui.gui;
+package pl.emilweglowski.ui.gui.reservations;
 
 public class GuestSelectionItem {
 

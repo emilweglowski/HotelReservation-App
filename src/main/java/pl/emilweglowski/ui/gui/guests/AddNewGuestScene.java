@@ -1,4 +1,4 @@
-package pl.emilweglowski.ui.gui;
+package pl.emilweglowski.ui.gui.guests;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
