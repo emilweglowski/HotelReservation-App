@@ -3,6 +3,7 @@ package pl.emilweglowski.ui.gui.rooms;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -16,19 +17,20 @@ public class RoomsTab {
 
     private Tab roomTab;
     private RoomService roomService = ObjectPool.getRoomService();
+    private Stage primaryStage;
 
     public RoomsTab(Stage primaryStage) {
 
         TableView<RoomDTO> tableView = getRoomDTOTableView();
-
+        this.primaryStage = primaryStage;
         Button button = new Button("Create new room");
         button.setOnAction(actionEvent -> {
-            Stage addRoomPopup = new Stage();
-            addRoomPopup.initModality(Modality.WINDOW_MODAL);
-            addRoomPopup.initOwner(primaryStage);
-            addRoomPopup.setScene(new AddNewRoomScene(addRoomPopup, tableView).getMainScene());
-            addRoomPopup.setTitle("Create new room");
-            addRoomPopup.showAndWait();
+            Stage addRoomStage = new Stage();
+            addRoomStage.initModality(Modality.WINDOW_MODAL);
+            addRoomStage.initOwner(this.primaryStage);
+            addRoomStage.setScene(new AddNewRoomScene(addRoomStage, tableView).getMainScene());
+            addRoomStage.setTitle("Create new room");
+            addRoomStage.showAndWait();
         });
 
         VBox layout = new VBox(button, tableView);
@@ -52,12 +54,14 @@ public class RoomsTab {
         TableColumn<RoomDTO, Integer> roomSizeColumn = new TableColumn<>("Room size");
         roomSizeColumn.setCellValueFactory(new PropertyValueFactory<>("roomSize"));
 
-        TableColumn<RoomDTO, RoomDTO> deleteColumn = new TableColumn<>("Delete room");
+        TableColumn<RoomDTO, RoomDTO> deleteColumn = new TableColumn<>("");
         deleteColumn.setCellValueFactory(value -> new ReadOnlyObjectWrapper<>(value.getValue()));
 
         deleteColumn.setCellFactory(param -> new TableCell<>() {
 
             Button deleteButton = new Button("Delete room");
+            Button editButton = new Button("Edit room");
+            HBox hBox = new HBox(deleteButton, editButton);
             @Override
             protected void updateItem(RoomDTO value, boolean empty) {
                 super.updateItem(value, empty);
@@ -65,10 +69,18 @@ public class RoomsTab {
                 if(value==null) {
                     setGraphic(null);
                 } else {
-                    setGraphic(deleteButton);
+                    setGraphic(hBox);
                     deleteButton.setOnAction(actionEvent -> {
                         roomService.removeRoom(value.getId());
                         tableView.getItems().remove(value);
+                    });
+                    editButton.setOnAction(actionEvent -> {
+                        Stage editRoomStage = new Stage();
+                        editRoomStage.initModality(Modality.WINDOW_MODAL);
+                        editRoomStage.initOwner(primaryStage);
+                        editRoomStage.setScene(new EditRoomScene(editRoomStage, tableView, value).getMainScene());
+                        editRoomStage.setTitle("Edit room");
+                        editRoomStage.showAndWait();
                     });
                 }
             }
