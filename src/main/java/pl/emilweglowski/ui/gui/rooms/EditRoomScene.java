@@ -22,7 +22,7 @@ public class EditRoomScene {
     private final List<ComboBox<String>> comboBoxes = new ArrayList<>();
     private final RoomService roomService = ObjectPool.getRoomService();
 
-    public EditRoomScene(Stage addRoomPopup, TableView<RoomDTO> roomsTableView, RoomDTO room){
+    public EditRoomScene(Stage editRoomStage, TableView<RoomDTO> roomsTableView, RoomDTO room){
 
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
@@ -82,7 +82,7 @@ public class EditRoomScene {
             List<RoomDTO> allAsDTO = roomService.getRoomsAsDTO();
             roomsTableView.getItems().addAll(allAsDTO);
 
-            addRoomPopup.close();
+            editRoomStage.close();
         });
 
         editRoomButton.setPadding(new Insets(5, 5, 5, 5));
