@@ -6,7 +6,7 @@ import pl.emilweglowski.domain.guest.GuestService;
 import pl.emilweglowski.domain.room.Room;
 import pl.emilweglowski.domain.room.RoomService;
 import pl.emilweglowski.exceptions.PersistenceToFileException;
-import pl.emilweglowski.util.Properties;
+import pl.emilweglowski.util.SystemUtils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -51,7 +51,7 @@ public class ReservationRepository {
     public void readAll() {
         String name = "reservations.csv";
 
-        Path file = Paths.get(Properties.DATA_DIRECTORY.toString(), name);
+        Path file = Paths.get(SystemUtils.DATA_DIRECTORY.toString(), name);
 
         if (!Files.exists(file)) {
             return;
@@ -91,7 +91,7 @@ public class ReservationRepository {
     public void saveAll() {
         String name = "reservations.csv";
 
-        Path file = Paths.get(Properties.DATA_DIRECTORY.toString(), name);
+        Path file = Paths.get(SystemUtils.DATA_DIRECTORY.toString(), name);
 
         StringBuilder sb = new StringBuilder("");
 

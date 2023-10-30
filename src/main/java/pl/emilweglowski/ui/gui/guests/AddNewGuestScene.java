@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import pl.emilweglowski.domain.ObjectPool;
 import pl.emilweglowski.domain.guest.GuestService;
 import pl.emilweglowski.domain.guest.dto.GuestDTO;
-import pl.emilweglowski.util.Properties;
+import pl.emilweglowski.util.SystemUtils;
 
 public class AddNewGuestScene {
 
@@ -60,8 +60,8 @@ public class AddNewGuestScene {
 
         Label genderLabel = new Label("Gender:");
         ComboBox<String> genderField = new ComboBox<>();
-        genderField.getItems().addAll(Properties.FEMALE, Properties.MALE);
-        genderField.setValue(Properties.FEMALE);
+        genderField.getItems().addAll(SystemUtils.FEMALE, SystemUtils.MALE);
+        genderField.setValue(SystemUtils.FEMALE);
 
         gridPane.add(genderLabel, 0, 3);
         gridPane.add(genderField, 1, 3);
@@ -76,7 +76,7 @@ public class AddNewGuestScene {
             String gender = genderField.getValue();
 
             boolean isMale = false;
-            if(gender.equals(Properties.MALE)){
+            if(gender.equals(SystemUtils.MALE)){
                 isMale = true;
             }
 

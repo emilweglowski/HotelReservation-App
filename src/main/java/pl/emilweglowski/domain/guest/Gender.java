@@ -1,11 +1,11 @@
 package pl.emilweglowski.domain.guest;
 
-import pl.emilweglowski.util.Properties;
+import pl.emilweglowski.util.SystemUtils;
 
 public enum Gender {
 
-    MALE(Properties.MALE),
-    FEMALE(Properties.FEMALE);
+    MALE(SystemUtils.MALE),
+    FEMALE(SystemUtils.FEMALE);
 
     private String asString;
 

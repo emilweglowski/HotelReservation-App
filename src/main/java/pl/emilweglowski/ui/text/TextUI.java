@@ -10,9 +10,8 @@ import pl.emilweglowski.domain.guest.Guest;
 import pl.emilweglowski.domain.guest.GuestService;
 import pl.emilweglowski.domain.room.Room;
 import pl.emilweglowski.domain.room.RoomService;
-import pl.emilweglowski.util.Properties;
+import pl.emilweglowski.util.SystemUtils;
 
-import java.security.PrivilegedActionException;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -91,9 +90,9 @@ public class TextUI {
 
     public void showSystemInfo() {
 
-        System.out.println("Welcome to the reservation system of " + Properties.HOTEL_NAME);
-        System.out.println("Actual system version: " + Properties.SYSTEM_VERSION);
-        System.out.println("Developer version: " + Properties.IS_DEVELOPER_VERSION);
+        System.out.println("Welcome to the reservation system of " + SystemUtils.HOTEL_NAME);
+        System.out.println("Actual system version: " + SystemUtils.SYSTEM_VERSION);
+        System.out.println("Developer version: " + SystemUtils.IS_DEVELOPER_VERSION);
 
         System.out.println("\n=============================\n");
     }
@@ -157,10 +156,10 @@ public class TextUI {
     private void createReservation(Scanner input) {
         System.out.println("Check-in date (DD.MM.YYYY):");
         String fromAsString = input.next();
-        LocalDate from = LocalDate.parse(fromAsString, Properties.DATE_FORMATTER);
+        LocalDate from = LocalDate.parse(fromAsString, SystemUtils.DATE_FORMATTER);
         System.out.println("Check-out date (DD.MM.YYYY):");
         String toAsString = input.next();
-        LocalDate to = LocalDate.parse(toAsString, Properties.DATE_FORMATTER);
+        LocalDate to = LocalDate.parse(toAsString, SystemUtils.DATE_FORMATTER);
         System.out.println("Enter room ID:");
         int roomId = input.nextInt();
         System.out.println("Enter guest ID:");

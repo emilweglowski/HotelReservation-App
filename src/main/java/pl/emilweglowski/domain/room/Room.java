@@ -2,13 +2,16 @@ package pl.emilweglowski.domain.room;
 
 import pl.emilweglowski.domain.room.dto.RoomDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Room {
 
     private final int id;
     private final int roomNumber;
-    private final BedType[] beds;
+    private final List<BedType> beds;
 
-    Room(int id, int roomNumber, BedType[] beds) {
+    Room(int id, int roomNumber, List<BedType> beds) {
         this.id = id;
         this.roomNumber = roomNumber;
         this.beds = beds;
@@ -33,24 +36,26 @@ public class Room {
     }
 
     String toCSV() {
-        String[] bedsAsString = getBedsAsStrings();
+        List<String> bedsAsString = getBedsAsStrings();
 
         String bedTypes = String.join("#", bedsAsString);
 
         return String.format("%d,%d,%s%s", this.id, this.roomNumber, bedTypes, System.getProperty("line.separator"));
     }
 
-    private String[] getBedsAsStrings() {
-        String[] bedsAsString = new String[this.beds.length];
+    private List<String> getBedsAsStrings() {
 
-        for (int i=0; i<this.beds.length; i++) {
-            bedsAsString[i] = this.beds[i].toString();
+        List<String> bedsAsString = new ArrayList<>();
+
+        for (int i=0; i<this.beds.size(); i++) {
+            bedsAsString.add(this.beds.get(i).toString());
         }
         return bedsAsString;
     }
 
     public RoomDTO generateDTO() {
-        String[] bedsAsString = getBedsAsStrings();
+
+        List<String> bedsAsString = getBedsAsStrings();
 
         String bedTypes = String.join(",", bedsAsString);
 
@@ -60,6 +65,6 @@ public class Room {
             roomSize += bedType.getSize();
         }
 
-        return new RoomDTO(this.id, this.roomNumber, bedTypes, beds.length, roomSize);
+        return new RoomDTO(this.id, this.roomNumber, bedTypes, beds.size(), roomSize);
     }
 }

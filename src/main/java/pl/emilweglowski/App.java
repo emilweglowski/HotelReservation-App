@@ -8,7 +8,7 @@ import pl.emilweglowski.domain.room.RoomService;
 import pl.emilweglowski.exceptions.PersistenceToFileException;
 import pl.emilweglowski.ui.text.TextUI;
 import pl.emilweglowski.ui.gui.PrimaryStage;
-import pl.emilweglowski.util.Properties;
+import pl.emilweglowski.util.SystemUtils;
 
 import java.io.IOException;
 
@@ -22,13 +22,15 @@ public class App extends Application {
     public static void main(String[] args) {
 
         try {
-            Properties.createDataDirectory();
+            SystemUtils su = new SystemUtils();
+            SystemUtils.createDataDirectory();
+            su.createDataBaseConnection();
             System.out.println("Loading data...");
             guestService.readAll();
             roomService.readAll();
             reservationService.readAll();
         } catch (IOException e) {
-            throw new PersistenceToFileException(Properties.DATA_DIRECTORY.toString(), "create", "directory");
+            throw new PersistenceToFileException(SystemUtils.DATA_DIRECTORY.toString(), "create", "directory");
         }
         Application.launch(args);
 //        textUI.showSystemInfo();

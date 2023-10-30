@@ -1,7 +1,7 @@
 package pl.emilweglowski.domain.room;
 
 import pl.emilweglowski.exceptions.PersistenceToFileException;
-import pl.emilweglowski.util.Properties;
+import pl.emilweglowski.util.SystemUtils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RoomRepository {
@@ -24,13 +25,13 @@ public class RoomRepository {
 
     private final List<Room> rooms = new ArrayList<>();
 
-    Room createNewRoom(int roomNumber, BedType[] bedType) {
+    Room createNewRoom(int roomNumber, List<BedType> bedType) {
         Room newRoom = new Room(findNewId(), roomNumber, bedType);
         rooms.add(newRoom);
         return newRoom;
     }
 
-    Room addExistingRoom(int id, int roomNumber, BedType[] bedType) {
+    Room addExistingRoom(int id, int roomNumber, List<BedType> bedType) {
         Room newRoom = new Room(id, roomNumber, bedType);
         rooms.add(newRoom);
         return newRoom;
@@ -43,7 +44,7 @@ public class RoomRepository {
     void saveAll() {
         String name = "rooms.csv";
 
-        Path file = Paths.get(Properties.DATA_DIRECTORY.toString(), name);
+        Path file = Paths.get(SystemUtils.DATA_DIRECTORY.toString(), name);
 
         StringBuilder sb = new StringBuilder("");
 
@@ -61,7 +62,7 @@ public class RoomRepository {
     void readAll() {
         String name = "rooms.csv";
 
-        Path file = Paths.get(Properties.DATA_DIRECTORY.toString(), name);
+        Path file = Paths.get(SystemUtils.DATA_DIRECTORY.toString(), name);
 
         if (!Files.exists(file)) {
             return;
@@ -85,16 +86,16 @@ public class RoomRepository {
 
                 for (int i = 0; i < bedTypes.length; i++) {
 
-                    if(bedTypesAsString[i].equals(Properties.SINGLE_BED)) {
+                    if(bedTypesAsString[i].equals(SystemUtils.SINGLE_BED)) {
                         bedTypes[i] = BedType.SINGLE;
-                    } else if(bedTypesAsString[i].equals(Properties.DOUBLE_BED)) {
+                    } else if(bedTypesAsString[i].equals(SystemUtils.DOUBLE_BED)) {
                         bedTypes[i] = BedType.DOUBLE;
-                    } else if(bedTypesAsString[i].equals(Properties.KING_SIZE)) {
+                    } else if(bedTypesAsString[i].equals(SystemUtils.KING_SIZE)) {
                         bedTypes[i] = BedType.KING_SIZE;
                     }
                 }
 
-                addExistingRoom(id, number, bedTypes);
+                addExistingRoom(id, number, Arrays.asList(bedTypes));
             }
         } catch (IOException e) {
             throw new PersistenceToFileException(file.toString(), "read", "rooms data");
@@ -124,7 +125,7 @@ public class RoomRepository {
         }
     }
 
-    public void editRoom(int id, int roomNumber, BedType[] bedTypes) {
+    public void editRoom(int id, int roomNumber, List<BedType> bedTypes) {
         this.remove(id);
         this.addExistingRoom(id, roomNumber, bedTypes);
     }

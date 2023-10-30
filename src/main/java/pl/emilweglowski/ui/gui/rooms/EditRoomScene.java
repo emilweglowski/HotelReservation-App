@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import pl.emilweglowski.domain.ObjectPool;
 import pl.emilweglowski.domain.room.RoomService;
 import pl.emilweglowski.domain.room.dto.RoomDTO;
-import pl.emilweglowski.util.Properties;
+import pl.emilweglowski.util.SystemUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,8 +97,8 @@ public class EditRoomScene {
 
     private ComboBox<String> createComboBox() {
         ComboBox<String> bedTypeField = new ComboBox<>();
-        bedTypeField.getItems().addAll(Properties.SINGLE_BED, Properties.DOUBLE_BED, Properties.KING_SIZE);
-        bedTypeField.setValue(Properties.SINGLE_BED);
+        bedTypeField.getItems().addAll(SystemUtils.SINGLE_BED, SystemUtils.DOUBLE_BED, SystemUtils.KING_SIZE);
+        bedTypeField.setValue(SystemUtils.SINGLE_BED);
         this.comboBoxes.add(bedTypeField);
         return bedTypeField;
     }
