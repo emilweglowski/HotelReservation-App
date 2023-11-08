@@ -32,7 +32,7 @@ public class RoomService {
     }
 
     public List<Room> getAllRooms() {
-        return this.repository.getAll();
+        return this.repository.getAllRooms();
     }
 
     public void saveAll() {
@@ -43,11 +43,11 @@ public class RoomService {
         this.repository.readAll();
     }
 
-    public void removeRoom(int id) {
+    public void removeRoom(long id) {
         this.repository.remove(id);
     }
 
-    public void editRoom(int id, int roomNumber, List<String> bedTypesAsStrings) {
+    public void editRoom(long id, int roomNumber, List<String> bedTypesAsStrings) {
 
         List<BedType> bedTypes = getBedTypes(bedTypesAsStrings);
 
@@ -108,7 +108,7 @@ public class RoomService {
 
     public List<RoomDTO> getRoomsAsDTO() {
         List<RoomDTO> result = new ArrayList<>();
-        List<Room> allRooms = repository.getAll();
+        List<Room> allRooms = repository.getAllRooms();
 
         for(Room room : allRooms) {
             RoomDTO dto = room.generateDTO();

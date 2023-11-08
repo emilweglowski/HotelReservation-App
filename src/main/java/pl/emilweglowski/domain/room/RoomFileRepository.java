@@ -14,7 +14,7 @@ import java.util.List;
 
 public class RoomFileRepository implements RoomRepository {
 
-    private final static RoomFileRepository instance = new RoomFileRepository();
+    private final static RoomRepository instance = new RoomFileRepository();
 
     private RoomFileRepository() {
     }
@@ -31,13 +31,13 @@ public class RoomFileRepository implements RoomRepository {
         return newRoom;
     }
 
-    Room addExistingRoom(int id, int roomNumber, List<BedType> bedType) {
+    Room addExistingRoom(long id, int roomNumber, List<BedType> bedType) {
         Room newRoom = new Room(id, roomNumber, bedType);
         rooms.add(newRoom);
         return newRoom;
     }
 
-    public List<Room> getAll() {
+    public List<Room> getAllRooms() {
         return this.rooms;
     }
 
@@ -104,8 +104,8 @@ public class RoomFileRepository implements RoomRepository {
         }
     }
 
-    private int findNewId() {
-        int max = 0;
+    private long findNewId() {
+        long max = 0;
         for (Room room : rooms) {
             if (room.getId() > max) {
                 max = room.getId();
@@ -115,7 +115,7 @@ public class RoomFileRepository implements RoomRepository {
     }
 
     @Override
-    public void remove(int id) {
+    public void remove(long id) {
         int roomToBeRemovedIndex = -1;
         for (int i=0; i<this.rooms.size(); i++) {
             if (this.rooms.get(i).getId() == id) {
@@ -129,13 +129,13 @@ public class RoomFileRepository implements RoomRepository {
     }
 
     @Override
-    public void editRoom(int id, int roomNumber, List<BedType> bedTypes) {
+    public void editRoom(long id, int roomNumber, List<BedType> bedTypes) {
         this.remove(id);
         this.addExistingRoom(id, roomNumber, bedTypes);
     }
 
     @Override
-    public Room getById(int id) {
+    public Room getById(long id) {
         for (Room room : rooms) {
             if (room.getId() == id) {
                 return room;

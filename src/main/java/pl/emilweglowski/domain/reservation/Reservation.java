@@ -32,7 +32,7 @@ public class Reservation {
     }
 
     public ReservationDTO generateDTO() {
-        return new ReservationDTO(this.id, this.from, this.to, this.room.getId(), this.room.getNumber(),
+        return new ReservationDTO(this.id, this.from, this.to, (int)this.room.getId(), this.room.getNumber(),
                 this.guest.getId(), this.guest.getFirstName()+" "+this.guest.getLastName());
     }
 }
