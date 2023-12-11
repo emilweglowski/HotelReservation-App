@@ -2,10 +2,11 @@ package pl.emilweglowski.domain;
 
 import pl.emilweglowski.domain.guest.GuestRepository;
 import pl.emilweglowski.domain.guest.GuestService;
+import pl.emilweglowski.domain.guest.GuestDatabaseRepository;
+import pl.emilweglowski.domain.reservation.ReservationDatabaseRepository;
 import pl.emilweglowski.domain.reservation.ReservationRepository;
 import pl.emilweglowski.domain.reservation.ReservationService;
 import pl.emilweglowski.domain.room.RoomDatabaseRepository;
-import pl.emilweglowski.domain.room.RoomFileRepository;
 import pl.emilweglowski.domain.room.RoomRepository;
 import pl.emilweglowski.domain.room.RoomService;
 
@@ -19,7 +20,8 @@ public class ObjectPool {
     }
 
     public static GuestRepository getGuestRepository() {
-        return GuestRepository.getInstance();
+//        return GuestFileRepository.getInstance();
+        return GuestDatabaseRepository.getInstance();
     }
 
     public static RoomService getRoomService() {
@@ -36,6 +38,7 @@ public class ObjectPool {
     }
 
     public static ReservationRepository getReservationRepository() {
-        return ReservationRepository.getInstance();
+//        return ReservationFileRepository.getInstance();
+        return ReservationDatabaseRepository.getInstance();
     }
 }

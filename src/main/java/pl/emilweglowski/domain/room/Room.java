@@ -8,8 +8,8 @@ import java.util.List;
 public class Room {
 
     private final long id;
-    private final int roomNumber;
-    private final List<BedType> beds;
+    private int roomNumber;
+    private List<BedType> beds;
 
     Room(long id, int roomNumber, List<BedType> beds) {
         this.id = id;
@@ -66,5 +66,17 @@ public class Room {
         }
 
         return new RoomDTO(this.id, this.roomNumber, bedTypes, beds.size(), roomSize);
+    }
+
+    void addBed(BedType bedType) {
+        this.beds.add(bedType);
+    }
+
+    void setNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    void setBeds(List<BedType> bedTypes) {
+        this.beds = bedTypes;
     }
 }

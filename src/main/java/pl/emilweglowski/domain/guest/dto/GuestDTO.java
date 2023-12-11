@@ -3,13 +3,13 @@ import pl.emilweglowski.domain.guest.Gender;
 
 public class GuestDTO {
 
-    private int id;
+    private long id;
     private String firstName;
     private String lastName;
     private int age;
     private String gender;
 
-    public GuestDTO(int id, String firstName, String lastName, int age, String gender) {
+    public GuestDTO(long id, String firstName, String lastName, int age, String gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,7 +17,7 @@ public class GuestDTO {
         this.gender = gender;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

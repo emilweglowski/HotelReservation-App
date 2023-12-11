@@ -53,7 +53,7 @@ public class AddNewReservationScene {
         List<GuestSelectionItem> guestSelectionItems = new ArrayList<>();
 
         this.guestService.getGuestsAsDTO().forEach(dto -> {
-            guestSelectionItems.add(new GuestSelectionItem(dto.getFirstName(), dto.getLastName(), dto.getId()));
+            guestSelectionItems.add(new GuestSelectionItem(dto.getFirstName(), dto.getLastName(), (int)dto.getId()));
         });
 
         Label roomLabel = new Label("Room:");
@@ -75,7 +75,7 @@ public class AddNewReservationScene {
             LocalDate from = fromDateField.getValue();
             LocalDate to = toDateField.getValue();
             int guestId = guestField.getValue().getId();
-            int roomId = roomField.getValue().getId();
+            long roomId = roomField.getValue().getId();
 
             try {
                 this.reservationService.createNewReservation(from, to, roomId, guestId);

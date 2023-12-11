@@ -102,7 +102,7 @@ public class RoomService {
         return Arrays.asList(bedTypes);
     }
 
-    public Room getRoomById(int roomId) {
+    public Room getRoomById(long roomId) {
         return this.repository.getById(roomId);
     }
 
@@ -111,6 +111,7 @@ public class RoomService {
         List<Room> allRooms = repository.getAllRooms();
 
         for(Room room : allRooms) {
+            System.out.println("Room" + room.getId());
             RoomDTO dto = room.generateDTO();
             result.add(dto);
         }

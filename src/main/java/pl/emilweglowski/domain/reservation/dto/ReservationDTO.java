@@ -7,16 +7,16 @@ import java.time.LocalDateTime;
 
 public class ReservationDTO {
 
-    private int id;
+    private long id;
     private LocalDateTime from;
     private LocalDateTime to;
-    private int roomId;
+    private long roomId;
     private int roomNumber;
-    private int guestId;
+    private long guestId;
     private String guestName;
 
-    public ReservationDTO(int id, LocalDateTime from, LocalDateTime to, int roomId,
-                          int roomNumber, int guestId, String guestName) {
+    public ReservationDTO(long id, LocalDateTime from, LocalDateTime to, long roomId,
+                          int roomNumber, long guestId, String guestName) {
         this.id = id;
         this.from = from;
         this.to = to;
@@ -26,7 +26,7 @@ public class ReservationDTO {
         this.guestName = guestName;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -38,7 +38,7 @@ public class ReservationDTO {
         return to;
     }
 
-    public int getRoomId() {
+    public long getRoomId() {
         return roomId;
     }
 
@@ -46,7 +46,7 @@ public class ReservationDTO {
         return roomNumber;
     }
 
-    public int getGuestId() {
+    public long getGuestId() {
         return guestId;
     }
 
