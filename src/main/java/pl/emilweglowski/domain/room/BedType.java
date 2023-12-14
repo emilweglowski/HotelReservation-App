@@ -6,7 +6,7 @@ public enum BedType {
 
     SINGLE(1, SystemUtils.SINGLE_BED),
     DOUBLE(2, SystemUtils.DOUBLE_BED),
-    KING_SIZE(3, SystemUtils.KING_SIZE);
+    KING_SIZE(2, SystemUtils.KING_SIZE);
 
     private int size;
     private String asString;
