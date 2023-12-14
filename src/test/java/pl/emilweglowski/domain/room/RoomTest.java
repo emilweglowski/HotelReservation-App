@@ -19,11 +19,11 @@ public class RoomTest {
         Room room = new Room(1, 302, beds);
 
         //when
-        String createdCVS = room.toCSV();
+        String createdCSV = room.toCSV();
 
         //then
-        String cvsTemplate = "1,302,Single#Double#King size"+System.getProperty("line.separator");
-        assertEquals(cvsTemplate, createdCVS, "Comparison of generated CVS formats");
+        String csvTemplate = "1,302,Single#Double#King size"+System.getProperty("line.separator");
+        assertEquals(csvTemplate, createdCSV, "Comparison of generated CVS formats");
     }
 
     @Test

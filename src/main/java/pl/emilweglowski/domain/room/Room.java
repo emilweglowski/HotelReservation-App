@@ -3,7 +3,6 @@ package pl.emilweglowski.domain.room;
 import pl.emilweglowski.domain.room.dto.RoomDTO;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Room {
@@ -12,7 +11,7 @@ public class Room {
     private int roomNumber;
     private List<BedType> beds;
 
-    Room(long id, int roomNumber, List<BedType> bedTypes) {
+    public Room(long id, int roomNumber, List<BedType> bedTypes) {
         this.id = id;
         this.roomNumber = roomNumber;
         if (bedTypes == null) {
