@@ -82,7 +82,7 @@ public class RoomService {
         this.repository.editRoom(id, roomNumber, bedTypes);
     }
 
-    private static List<BedType> getBedTypes(int[] bedTypesOptions) {
+    List<BedType> getBedTypes(int[] bedTypesOptions) {
 
         BedType[] bedTypes = new BedType[bedTypesOptions.length];
 

@@ -55,4 +55,26 @@ public class ReservationTest {
         assertEquals(reservationDTO.getGuestId(), 2);
         assertEquals(reservationDTO.getGuestName(), "Jan Kowalski");
     }
+
+    @Test
+    public void generateDTOWithNullBedsListTest() {
+
+        //given
+        Room room = new Room(1, 301, null);
+        Guest guest = new Guest(2, "Jan", "Kowalski", 40, Gender.MALE);
+        Reservation reservation = new Reservation(3, room, guest, LocalDateTime.of(2023,12,15,15,0),
+                LocalDateTime.of(2023,12,18,10,0));
+
+        //when
+        ReservationDTO reservationDTO = reservation.generateDTO();
+
+        //then
+        assertEquals(reservationDTO.getId(), 3);
+        assertEquals(reservationDTO.getFrom().toString(), "2023-12-15T15:00");
+        assertEquals(reservationDTO.getTo().toString(), "2023-12-18T10:00");
+        assertEquals(reservationDTO.getRoomId(), 1);
+        assertEquals(reservationDTO.getRoomNumber(), 301);
+        assertEquals(reservationDTO.getGuestId(), 2);
+        assertEquals(reservationDTO.getGuestName(), "Jan Kowalski");
+    }
 }

@@ -1,6 +1,7 @@
 package pl.emilweglowski.domain.reservation.dto;
 
 import pl.emilweglowski.domain.guest.Guest;
+import pl.emilweglowski.domain.room.BedType;
 import pl.emilweglowski.domain.room.Room;
 
 import java.time.LocalDateTime;
