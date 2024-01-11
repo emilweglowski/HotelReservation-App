@@ -19,11 +19,11 @@ public class Reservation {
     }
 
     public LocalDateTime getFrom() {
-        return from;
+        return this.from;
     }
 
     public LocalDateTime getTo() {
-        return to;
+        return this.to;
     }
 
     public Reservation(long id, Room room, Guest guest, LocalDateTime from, LocalDateTime to) {
@@ -44,7 +44,7 @@ public class Reservation {
     }
 
     public Room getRoom() {
-        return room;
+        return this.room;
     }
 
     public ReservationDTO generateDTO() {
