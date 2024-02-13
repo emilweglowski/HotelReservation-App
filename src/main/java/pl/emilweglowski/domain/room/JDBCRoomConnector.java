@@ -48,7 +48,7 @@ public class JDBCRoomConnector implements DatabaseRoomConnector {
                 } else if (SystemUtils.KING_SIZE.equals(bedType)) {
                     bedTypeAsEnum = BedType.KING_SIZE;
                 }
-                Object[] tuple = new Object[]{roomId, bedType};
+                Object[] tuple = new Object[]{roomId, bedTypeAsEnum};
                 result.add(tuple);
             }
         } catch (SQLException e) {

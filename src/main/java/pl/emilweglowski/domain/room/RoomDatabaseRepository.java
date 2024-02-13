@@ -28,7 +28,7 @@ public class RoomDatabaseRepository implements RoomRepository {
         List<Object[]> allBeds = connector.getAllBeds();
 
         for (Object[] tuple : allBeds) {
-            this.getById((long) tuple[0]).addBed((BedType) tuple[1]);
+            this.getById((long)tuple[0]).addBed((BedType)tuple[1]);
         }
     }
 

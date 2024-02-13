@@ -116,7 +116,6 @@ public class RoomService {
         List<Room> allRooms = repository.getAllRooms();
 
         for(Room room : allRooms) {
-            System.out.println("Room" + room.getId());
             RoomDTO dto = room.generateDTO();
             result.add(dto);
         }
@@ -136,6 +135,10 @@ public class RoomService {
         LocalDateTime fromWithHour = from.atTime(SystemUtils.HOTEL_NIGHT_START_HOUR, SystemUtils.HOTEL_NIGHT_START_MINUTE);
         LocalDateTime toWithHour = to.atTime(SystemUtils.HOTEL_NIGHT_END_HOUR, SystemUtils.HOTEL_NIGHT_END_MINUTE);
 
+        if(this.reservationService==null) {
+            this.reservationService = ObjectPool.getReservationService();
+        }
+
         List<Reservation> reservations = this.reservationService.getAllReservations();
 
         for(Reservation reservation : reservations) {
@@ -151,8 +154,18 @@ public class RoomService {
                 availableRooms.remove(reservation.getRoom());
             }
         }
-
         return availableRooms;
+    }
+
+    public List<RoomDTO> getAvailableRoomsAsDTO(LocalDate from, LocalDate to) {
+        List<Room> availableRooms = this.getAvailableRooms(from, to);
+        List<RoomDTO> result = new ArrayList<>();
+
+        for (Room room : availableRooms) {
+            result.add(room.generateDTO());
+        }
+
+        return result;
     }
 
     public void setRepository(RoomRepository roomRepository) {

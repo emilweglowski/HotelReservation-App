@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import jdk.jshell.execution.LoaderDelegate;
 import pl.emilweglowski.domain.ObjectPool;
 import pl.emilweglowski.domain.guest.GuestService;
 import pl.emilweglowski.domain.reservation.ReservationService;
@@ -59,6 +60,36 @@ public class AddNewReservationScene {
         Label roomLabel = new Label("Room:");
         ComboBox<RoomSelectionItem> roomField = new ComboBox<>();
         roomField.getItems().addAll(roomSelectionItems);
+
+        fromDateField.valueProperty().addListener((ov, oldValue, newValue) -> {
+            LocalDate from = newValue;
+            LocalDate to = toDateField.getValue();
+
+            if (from!=null && to!=null) {
+                List<RoomDTO> availableRoomsAsDTO = this.roomService.getAvailableRoomsAsDTO(from, to);
+                roomSelectionItems.clear();
+                for (RoomDTO dto : availableRoomsAsDTO) {
+                    roomSelectionItems.add(new RoomSelectionItem(dto.getNumber(), (int)dto.getId()));
+                }
+                roomField.getItems().clear();
+                roomField.getItems().addAll(roomSelectionItems);
+            }
+        });
+
+        toDateField.valueProperty().addListener((ov, oldValue, newValue) -> {
+            LocalDate from = fromDateField.getValue();
+            LocalDate to = newValue;
+
+            if (from!=null && to!=null) {
+                List<RoomDTO> availableRoomsAsDTO = this.roomService.getAvailableRoomsAsDTO(from, to);
+                roomSelectionItems.clear();
+                for (RoomDTO dto : availableRoomsAsDTO) {
+                    roomSelectionItems.add(new RoomSelectionItem(dto.getNumber(), (int)dto.getId()));
+                }
+                roomField.getItems().clear();
+                roomField.getItems().addAll(roomSelectionItems);
+            }
+        });
 
         gridPane.add(roomLabel, 0,2);
         gridPane.add(roomField, 1,2);
