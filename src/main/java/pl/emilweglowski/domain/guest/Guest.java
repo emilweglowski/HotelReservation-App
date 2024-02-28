@@ -1,14 +1,18 @@
 package pl.emilweglowski.domain.guest;
-
+import jakarta.persistence.*;
 import pl.emilweglowski.domain.guest.dto.GuestDTO;
 
+@Entity
 public class Guest {
 
-    private final long id;
-    private final String firstName;
-    private final String lastName;
-    private final int age;
-    private final Gender gender;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private String firstName;
+    private String lastName;
+    private int age;
+    @Enumerated
+    private Gender gender;
 
     public Guest(long id, String firstName, String lastName, int age, Gender gender) {
         this.id = id;
@@ -16,6 +20,16 @@ public class Guest {
         this.lastName = lastName;
         this.age = age;
         this.gender = gender;
+    }
+
+    public Guest(String firstName, String lastName, int age, Gender gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+    }
+
+    public Guest() {
     }
 
     public long getId() {
@@ -44,5 +58,21 @@ public class Guest {
             gender = "female";
         }
         return new GuestDTO(this.id, this.firstName, this.lastName, this.age, gender);
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

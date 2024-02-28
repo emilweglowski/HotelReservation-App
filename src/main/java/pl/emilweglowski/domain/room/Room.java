@@ -1,15 +1,20 @@
 package pl.emilweglowski.domain.room;
 
+import jakarta.persistence.*;
 import pl.emilweglowski.domain.room.dto.RoomDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Room {
 
-    private final long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private int roomNumber;
+    @ElementCollection(targetClass = BedType.class)
     private List<BedType> beds;
 
     public Room(long id, int roomNumber, List<BedType> bedTypes) {
@@ -20,6 +25,9 @@ public class Room {
         } else {
             this.beds = bedTypes;
         }
+    }
+
+    public Room() {
     }
 
     public long getId() {

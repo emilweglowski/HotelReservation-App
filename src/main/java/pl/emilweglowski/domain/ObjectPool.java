@@ -1,5 +1,6 @@
 package pl.emilweglowski.domain;
 
+import pl.emilweglowski.domain.guest.GuestJPARepository;
 import pl.emilweglowski.domain.guest.GuestRepository;
 import pl.emilweglowski.domain.guest.GuestService;
 import pl.emilweglowski.domain.guest.GuestDatabaseRepository;
@@ -23,7 +24,8 @@ public class ObjectPool {
 
     public static GuestRepository getGuestRepository() {
 //        return GuestFileRepository.getInstance();
-        return GuestDatabaseRepository.getInstance();
+//        return GuestDatabaseRepository.getInstance();
+        return GuestJPARepository.getInstance();
     }
 
     public static RoomService getRoomService() {
