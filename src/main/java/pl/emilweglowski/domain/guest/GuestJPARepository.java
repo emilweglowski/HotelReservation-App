@@ -64,7 +64,7 @@ public class GuestJPARepository implements GuestRepository {
         guest.setAge(age);
         guest.setGender(gender);
         transaction.commit();
-        System.out.println(guest.getInfo() + " is guest object after edit");
+        System.out.println("Guest object after  is: "+guest.getInfo());
     }
 
     @Override

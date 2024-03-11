@@ -27,6 +27,11 @@ public class Room {
         }
     }
 
+    public Room(int roomNumber, List<BedType> beds) {
+        this.roomNumber = roomNumber;
+        this.beds = beds;
+    }
+
     public Room() {
     }
 
