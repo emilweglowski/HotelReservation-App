@@ -14,12 +14,13 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @OneToOne
-    private final Room room;
+    private Room room;
     @OneToOne
-    private final Guest guest;
+    private Guest guest;
     @Column(name = "fromDate")
-    private final LocalDateTime from;
-    private final LocalDateTime to;
+    private LocalDateTime from;
+    @Column(name = "toDate")
+    private LocalDateTime to;
 
     public Guest getGuest() {
         return guest;

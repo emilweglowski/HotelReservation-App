@@ -14,7 +14,6 @@ import pl.emilweglowski.ui.gui.PrimaryStage;
 import pl.emilweglowski.util.SystemUtils;
 
 import java.io.IOException;
-import java.util.List;
 
 public class App extends Application {
 
@@ -30,14 +29,6 @@ public class App extends Application {
             SystemUtils.createDataDirectory();
             su.createDataBaseConnection();
             System.out.println("Loading data...");
-            GuestJPARepository jpaRepository = new GuestJPARepository();
-            Guest newGuest = jpaRepository.createNewGuest("Jan", "Kowalski", 53, Gender.MALE);
-            List<Guest> allGuests = jpaRepository.getAll();
-            for(Guest guest : allGuests) {
-                System.out.println(guest.getInfo());
-            }
-            jpaRepository.edit(newGuest.getId(), "Tony", "Stark", 45, Gender.MALE);
-            jpaRepository.remove(newGuest.getId());
             guestService.readAll();
             roomService.readAll();
             reservationService.readAll();
